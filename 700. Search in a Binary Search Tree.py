@@ -10,4 +10,4 @@ class Solution:
         elif root.val > val:
             return self.searchBST(root.left, val)
         else:
-            return NULL
+            return []
