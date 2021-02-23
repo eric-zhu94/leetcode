@@ -1,0 +1,27 @@
+#https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/
+class Solution:
+    #O(n) solution, need to iterate through each element to add to count array
+    #O(1) space complexity due to mod 60
+    def numPairsDivisibleBy60(self, time: List[int]) -> int:
+        counts = [0 for x in range(60)]
+        for t in time:
+            seconds = t % 60
+            counts[seconds] += 1
+        ans = 0
+        i = 1
+        while i < 30:
+            ans += (counts[i] * counts[60 - i])
+            i += 1
+        if counts[30] > 1:
+            tmp = counts[30] - 1
+            while tmp != 0:
+                ans += tmp
+                tmp -= 1
+        if counts[0] > 1:
+            tmp = counts[0] - 1
+            while tmp != 0:
+                ans += tmp
+                tmp -= 1
+        return ans
+                
+            
