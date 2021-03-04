@@ -1,0 +1,34 @@
+#https://leetcode.com/problems/logger-rate-limiter/
+#O(1) time complexity due to hash table lookup in constant time
+#O(n) where n is num unique messages
+class Logger:
+
+    def __init__(self):
+        self.last = {}
+        """
+        Initialize your data structure here.
+        """
+        
+
+    def shouldPrintMessage(self, timestamp: int, message: str) -> bool:
+        if message not in self.last:
+            self.last[message] = timestamp
+            return True
+        else:
+            if timestamp - self.last[message] >= 10:
+                self.last[message] = timestamp
+                return True
+            else:
+                return False
+                
+        """
+        Returns true if the message should be printed in the given timestamp, otherwise returns false.
+        If this method returns false, the message will not be printed.
+        The timestamp is in seconds granularity.
+        """
+        
+
+
+# Your Logger object will be instantiated and called as such:
+# obj = Logger()
+# param_1 = obj.shouldPrintMessage(timestamp,message)
