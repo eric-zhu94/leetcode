@@ -1,0 +1,43 @@
+class Solution:
+    def numUniqueEmails(self, emails: List[str]) -> int:
+        seen = {}
+        count = 0
+        for email in emails:
+            raw = []
+            local = True
+            plusflag = False
+            for char in email:
+                if not local:
+                    raw.append(char)
+                    continue
+                else:
+                    if plusflag:
+                        if char == '@':
+                            plusflag = False
+                            local = False
+                            raw.append(char)
+                        else:
+                            continue
+                    else:
+                        if char == '.':
+                            continue
+                        elif char == '+':
+                            plusflag = True
+                        elif char == '@':
+                            local = False
+                            raw.append(char)
+                        else:
+                            raw.append(char)
+            edited = ''.join(raw)
+            if edited not in seen:
+                seen[edited] = True
+                count +=1
+            else:
+                continue
+
+
+                
+            
+            
+        return count
+        
