@@ -1,0 +1,35 @@
+"""
+# Definition for Employee.
+class Employee:
+    def __init__(self, id: int, importance: int, subordinates: List[int]):
+        self.id = id
+        self.importance = importance
+        self.subordinates = subordinates
+"""
+
+class Solution:
+    #search problem, return sum of value of employee node and all children nodes
+    #assume not sorted, store employee id:values and id:reports in two dicts
+    #O(n) traversal to generate the dicts, and O(n) additional storage
+    #helper function returns importance values of all children, taking in an employee
+    def helper(self, employee, values, reports):
+        sub_value = values[employee]
+        for sub in reports[employee]:
+            sub_value += self.helper(sub, values,reports)
+        return sub_value
+    
+    def getImportance(self, employees: List['Employee'], id: int) -> int:
+        values = {}
+        reports = {}
+        total = 0
+        for e in employees:
+            values[e.id] = e.importance
+            reports[e.id] = e.subordinates
+        total += values[id]
+        for employee in reports[id]:
+            total += self.helper(employee, values, reports)
+            
+        return total
+        
+        
+        
