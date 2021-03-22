@@ -1,0 +1,26 @@
+#O(m+n) time complexity and space complexity
+#https://leetcode.com/problems/backspace-string-compare/
+class Solution:
+    def compare(self, string):
+        stack = []
+        for char in string:
+            if len(stack) > 0:
+                if char == '#':
+                    stack.pop()
+                else:
+                    stack.append(char)
+            else:
+                if char != '#':
+                    stack.append(char)
+        return ''.join(stack)
+    
+
+    def backspaceCompare(self, S: str, T: str) -> bool:
+        if self.compare(S) == self.compare(T):
+            return True
+        return False
+
+        
+        
+
+        
