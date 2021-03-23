@@ -1,0 +1,30 @@
+class Solution:
+    #O(n) solution, simulate process by tracking change
+    #O(1) space
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        five = 0
+        ten = 0
+        for cust in bills:
+            if cust == 20:
+                if five >= 1 and ten >= 1:
+                    five -=1
+                    ten -=1
+                elif five >= 3:
+                    five = five - 3
+                else:
+                    return False
+            elif cust == 10:
+                if five >= 1:
+                    five -=1
+                    ten +=1
+                else:
+                    return False
+            elif cust == 5:
+                five +=1
+            else:
+                return False
+        return True
+    
+                    
+            
+        
