@@ -1,0 +1,22 @@
+class Solution:
+    #track frequency, alphabetic comparison
+    #O(n + klogn) solution, iterate through n words, adding to heap, each operation taking log k time
+    #pop k elements in log n time
+    #O(n) solution for wordfreq and heap
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        wordfreq = {}
+        for word in words:
+            if word not in wordfreq:
+                wordfreq[word] = 1
+
+            else:
+                wordfreq[word] += 1
+        heap = []
+        for word in wordfreq:
+            heap.append((-wordfreq[word], word))
+        heapq.heapify(heap)
+        ans = []
+        for i in range(k):
+            ans.append(heapq.heappop(heap)[1])
+        return ans
+        
